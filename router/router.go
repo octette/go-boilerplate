@@ -7,5 +7,11 @@ import (
 )
 
 func Load(middleware ...gin.HandlerFunc) http.Handler {
+	e := gin.New()
 
+	e.Use(gin.Recovery())
+	e.Use(gin.Logger())
+	e.Use(middleware...)
+
+	return e
 }
