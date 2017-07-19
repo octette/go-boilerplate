@@ -1,5 +1,5 @@
-hash: 22f438cfab8d781edb89c937d6fe63ee4c15a44d4fb7e2d4c677ea5e2239ee3c
-updated: 2017-07-19T15:44:55.775353732+03:00
+hash: 288f3c53fdeb2eb6add5cf0917c786ab9502e40d09b2522cbeb76ee7d5d694c8
+updated: 2017-07-19T18:57:33.26649329+03:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -26,16 +26,22 @@ imports:
   version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
   - codec
+- name: github.com/urfave/cli
+  version: 4b90d79a682b4bf685762c7452db20f2a676ecb2
+- name: golang.org/x/crypto
+  version: bed12803fa9663d7aa2c2346b0c634ad2dcd43b7
+  subpackages:
+  - acme/autocert
 - name: golang.org/x/net
-  version: 02ac38e2528ff4adea90f184d71a3faa04b4b1b0
+  version: 41bba8d80bbfab43231ffdf4c210037baae5f6a3
   subpackages:
   - context
 - name: golang.org/x/sys
-  version: cd2c276457edda6df7fb04895d3fd6a6add42926
+  version: 7a6e5648d140666db5d920909e082ca00a87ba2c
   subpackages:
   - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
-  version: 3b4ad1db5b2a649883ff3782f5f9f6fb52be71af
+  version: 4c78c975fe7c825c6d1466c42be594d1d6f3aba6
 testImports: []
