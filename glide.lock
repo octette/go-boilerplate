@@ -1,6 +1,41 @@
-hash: 878381469b3a5ba81fb165c9ebda86be492ccc3433dcf05276783b96f34f7adb
-updated: 2017-07-19T12:03:11.569940916+03:00
+hash: 22f438cfab8d781edb89c937d6fe63ee4c15a44d4fb7e2d4c677ea5e2239ee3c
+updated: 2017-07-19T15:44:55.775353732+03:00
 imports:
+- name: github.com/gin-contrib/sse
+  version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
+  subpackages:
+  - binding
+  - render
+- name: github.com/go-sql-driver/mysql
+  version: 3955978caca48c1658a4bb7a9c6a0f084e326af3
+- name: github.com/golang/protobuf
+  version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
+  subpackages:
+  - proto
+- name: github.com/jinzhu/gorm
+  version: 2a1463811ee1dc85d168fd639a2d4251d030e6e5
+  subpackages:
+  - dialects/mysql
+- name: github.com/jinzhu/inflection
+  version: 1c35d901db3da928c72a72d8458480cc9ade058f
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/ugorji/go
+  version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
+  subpackages:
+  - codec
+- name: golang.org/x/net
+  version: 02ac38e2528ff4adea90f184d71a3faa04b4b1b0
+  subpackages:
+  - context
+- name: golang.org/x/sys
+  version: cd2c276457edda6df7fb04895d3fd6a6add42926
+  subpackages:
+  - unix
+- name: gopkg.in/go-playground/validator.v8
+  version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
+- name: gopkg.in/yaml.v2
+  version: 3b4ad1db5b2a649883ff3782f5f9f6fb52be71af
 testImports: []

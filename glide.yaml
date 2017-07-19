@@ -2,3 +2,6 @@ package: github.com/ufukomer/tagon-api
 import:
 - package: github.com/gin-gonic/gin
   version: ^1.2.0
+- package: golang.org/x/net
+  subpackages:
+  - context

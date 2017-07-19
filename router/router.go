@@ -14,7 +14,7 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.Use(gin.Logger())
 	e.Use(middleware...)
 
-	v3 := e.Group("/v3")
+	v3 := e.Group("/api/v3")
 	{
 		v3.GET("users", handler.GetUserList)
 	}
