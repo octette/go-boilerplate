@@ -45,8 +45,11 @@ var flags = []cli.Flag{
 func api(c *cli.Context) error {
 
 	store := setupStore(c)
+
 	// setup the server and start the listener
 	handler := router.Load(middleware.Store(store))
 
 	http.ListenAndServe(":8880", handler)
+
+	return nil
 }
