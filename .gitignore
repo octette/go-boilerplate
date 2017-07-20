@@ -1,3 +1,9 @@
 # JetBrains
-.idea
+/.idea
 *.iml
+
+# OS X
+.DS_Store
+
+# Binary
+/cmd/tagonapi/tagonapi
