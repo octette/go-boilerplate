@@ -9,6 +9,8 @@ import (
 	"github.com/urfave/cli"
 )
 
+// flag.String("hostAddr", "127.0.0.1", "host address")
+
 var flags = []cli.Flag{
 	cli.StringFlag{
 		EnvVar: "HOST",
