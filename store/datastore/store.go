@@ -1,7 +1,7 @@
 package datastore
 
 import (
-	"fmt"
+	"strconv"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/ufukomer/tagon-api/store"
@@ -9,29 +9,28 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// datastore is an implementation of a model.Store built on top
-// of the sql/database driver with a relational database backend.
-type datastore struct {
+// Datastore is an implementation of a model.Store built on top
+// of the mysql driver with a relational database backend.
+type Datastore struct {
 	*gorm.DB
-}
-
-type Config struct {
 	Host     string
 	DBName   string
-	DBUser   string
+	User     string
 	Password string
 	Port     int
 }
 
-func New(config Config) store.Store {
-	return &datastore{
-		DB: open(config),
-	}
+type Option func(*Datastore)
 
+func New(option Option) store.Store {
+	datastore := &Datastore{}
+	option(datastore)
+	open(datastore)
+	return datastore
 }
 
-func open(config Config) *gorm.DB {
-	db, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", config.DBUser, config.Password, config.Host, config.Port, config.DBName))
+func open(d *Datastore) *gorm.DB {
+	db, err := gorm.Open("mysql", d.User+":"+d.Password+"@tcp("+d.Host+":"+strconv.Itoa(d.Port)+")/"+d.DBName+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic(err)
 	}

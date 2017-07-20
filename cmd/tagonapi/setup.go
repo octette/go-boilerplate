@@ -7,11 +7,11 @@ import (
 )
 
 func setupStore(c *cli.Context) store.Store {
-	return datastore.New(datastore.Config{
-		Host:     c.String("host"),
-		DBName:   c.String("mysql-dbname"),
-		DBUser:   c.String("mysql-dbuser"),
-		Password: c.String("mysql-password"),
-		Port:     c.Int("mysql-port"),
+	return datastore.New(func(d *datastore.Datastore) {
+		d.Host = c.String("host")
+		d.DBName = c.String("mysql-dbname")
+		d.User = c.String("mysql-dbuser")
+		d.Password = c.String("mysql-password")
+		d.Port = c.Int("mysql-port")
 	})
 }
