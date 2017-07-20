@@ -5,3 +5,8 @@ import:
 - package: golang.org/x/net
   subpackages:
   - context
+- package: golang.org/x/crypto
+  subpackages:
+  - acme/autocert
+- package: github.com/mattn/go-isatty
+  version: ^0.0.2
