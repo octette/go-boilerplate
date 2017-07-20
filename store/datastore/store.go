@@ -23,10 +23,10 @@ type Datastore struct {
 type Option func(*Datastore)
 
 func New(option Option) store.Store {
-	datastore := &Datastore{}
-	option(datastore)
-	open(datastore)
-	return datastore
+	d := &Datastore{}
+	option(d)
+	d.DB = open(d)
+	return d
 }
 
 func open(d *Datastore) *gorm.DB {
