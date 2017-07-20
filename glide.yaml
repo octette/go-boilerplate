@@ -10,3 +10,8 @@ import:
   - acme/autocert
 - package: github.com/mattn/go-isatty
   version: ^0.0.2
+- package: github.com/Sirupsen/logrus
+  version: ^1.0.2
+- package: github.com/gin-gonic/contrib
+  subpackages:
+  - ginrus
