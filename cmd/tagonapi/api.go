@@ -5,11 +5,8 @@ import (
 
 	"github.com/ufukomer/tagon-api/router"
 	"github.com/ufukomer/tagon-api/router/middleware"
-
 	"github.com/urfave/cli"
 )
-
-// flag.String("hostAddr", "127.0.0.1", "host address")
 
 var flags = []cli.Flag{
 	cli.StringFlag{
@@ -49,7 +46,9 @@ func api(c *cli.Context) error {
 	store := setupStore(c)
 
 	// setup the server and start the listener
-	handler := router.Load(middleware.Store(store))
+	handler := router.Load(
+		middleware.Store(store),
+	)
 
 	http.ListenAndServe(":8880", handler)
 
