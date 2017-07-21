@@ -6,6 +6,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/ufukomer/tagon-api/model"
 	"github.com/ufukomer/tagon-api/store"
 )
 
@@ -30,12 +31,14 @@ func New(opts options) store.Store {
 }
 
 func open(d *Datastore) *gorm.DB {
-	db, err := gorm.Open("mysql", d.User+":"+d.Password+"@tcp("+d.Host+":"+strconv.Itoa(d.Port)+")/"+d.DBName+"?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.OpOpen("mysql", d.User+":"+d.Password+"@tcp("+d.Host+":"+strconv.Itoa(d.Port)+")/"+d.DBName+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		logrus.Errorln(err)
 		logrus.Fatalln("database connection failed")
 	}
 	defer db.Close()
+
+	db.AutoMigrate(&model.User{})
 
 	return db
 }
