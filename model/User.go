@@ -1,12 +1,9 @@
 package model
 
+import "github.com/jinzhu/gorm"
+
 type User struct {
-	ID         int64
-	Name       string
-	Status     string
-	Email      string
-	Phone      string
-	Account_id int
-	created_at string
-	updated_at string
+	gorm.Model
+	Email    string
+	Password string
 }
