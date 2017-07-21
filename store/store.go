@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/ufukomer/tagon-api/model"
+	"github.com/ufukomer/go-boilerplate/model"
 )
 
 type Store interface {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/ufukomer/tagon-api/store"
-	"github.com/ufukomer/tagon-api/store/datastore"
+	"github.com/ufukomer/go-boilerplate/store"
+	"github.com/ufukomer/go-boilerplate/store/datastore"
 	"github.com/urfave/cli"
 )
 

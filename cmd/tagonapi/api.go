@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/ufukomer/tagon-api/router"
-	"github.com/ufukomer/tagon-api/router/middleware"
+	"github.com/ufukomer/go-boilerplate/router"
+	"github.com/ufukomer/go-boilerplate/router/middleware"
 	"github.com/urfave/cli"
 )
 

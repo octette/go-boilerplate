@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/ufukomer/tagon-api/store"
+	"github.com/ufukomer/go-boilerplate/store"
 
 	"github.com/gin-gonic/gin"
 )

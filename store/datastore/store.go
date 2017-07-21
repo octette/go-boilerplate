@@ -6,8 +6,8 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/ufukomer/tagon-api/model"
-	"github.com/ufukomer/tagon-api/store"
+	"github.com/ufukomer/go-boilerplate/model"
+	"github.com/ufukomer/go-boilerplate/store"
 )
 
 // Datastore is an implementation of a model.Store built on top

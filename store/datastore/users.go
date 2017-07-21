@@ -1,6 +1,6 @@
 package datastore
 
-import "github.com/ufukomer/tagon-api/model"
+import "github.com/ufukomer/go-boilerplate/model"
 
 func (db *Datastore) GetUserList() ([]*model.User, error) {
 	var users = []*model.User{}
