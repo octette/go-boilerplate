@@ -16,6 +16,12 @@ var flags = []cli.Flag{
 		Value:  "localhost",
 	},
 	cli.StringFlag{
+		EnvVar: "PORT",
+		Name:   "port",
+		Usage:  "port number",
+		Value:  "8880",
+	},
+	cli.StringFlag{
 		EnvVar: "MYSQL_DBNAME",
 		Name:   "mysql-dbname",
 		Usage:  "msql database name",
@@ -50,7 +56,7 @@ func api(c *cli.Context) error {
 		middleware.Store(store),
 	)
 
-	http.ListenAndServe(":8880", handler)
+	http.ListenAndServe(":"+c.String("port"), handler)
 
 	return nil
 }

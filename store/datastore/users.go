@@ -8,3 +8,9 @@ func (db *Datastore) GetUserList() ([]*model.User, error) {
 
 	return users, err
 }
+func (db *Datastore) GetUser(ID string) (*model.User, error) {
+	var user = *model.User{}
+	var err = db.First(user, ID)
+
+	return user
+}

@@ -8,6 +8,7 @@ import (
 
 type Store interface {
 	GetUserList() ([]*model.User, error)
+	GetUser(ID string) (*model.User, error)
 }
 
 // GetUserList gets a list of all users in the system.
