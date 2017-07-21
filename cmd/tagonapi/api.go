@@ -19,7 +19,7 @@ var flags = []cli.Flag{
 		EnvVar: "MYSQL_DBNAME",
 		Name:   "mysql-dbname",
 		Usage:  "msql database name",
-		Value:  "tagon-api",
+		Value:  "go-boilerplate",
 	},
 	cli.StringFlag{
 		EnvVar: "MYSQL_DBUSER",
