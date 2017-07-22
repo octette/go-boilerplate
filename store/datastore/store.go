@@ -4,10 +4,10 @@ import (
 	"strconv"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/drone/drone/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/ufukomer/go-boilerplate/store"
+	"github.com/ufukomer/tagon-api/model"
 )
 
 // Datastore is an implementation of a model.Store built on top
