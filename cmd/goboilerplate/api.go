@@ -9,6 +9,7 @@ import (
 )
 
 var flags = []cli.Flag{
+
 	cli.StringFlag{
 		EnvVar: "HOST",
 		Name:   "host",
