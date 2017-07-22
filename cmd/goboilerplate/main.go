@@ -9,7 +9,7 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "tagonapi"
+	app.Name = "goboilerplate"
 	app.Usage = "Start Tagon API Server"
 	app.Action = api
 	app.Flags = flags
