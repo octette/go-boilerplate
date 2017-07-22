@@ -8,8 +8,6 @@ import (
 	"github.com/urfave/cli"
 )
 
-//
-
 var flags = []cli.Flag{
 	cli.StringFlag{
 		EnvVar: "HOST",
