@@ -1,5 +1,5 @@
-hash: 683a171788b10b572f7616d98ceb619de005cba43e5e6a6964548dae76c996e2
-updated: 2017-07-20T15:42:02.478941051+03:00
+hash: 1593dd876d6f8920588727465af3b4d73ab5d77b69fb5b2aac283fc4f5faff9c
+updated: 2017-07-23T19:27:30.24689945+03:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -19,7 +19,7 @@ imports:
   subpackages:
   - proto
 - name: github.com/jinzhu/gorm
-  version: 2a1463811ee1dc85d168fd639a2d4251d030e6e5
+  version: 5b8c0dd6b92d9caa8036c31dcb117f2df7cceefa
   subpackages:
   - dialects/mysql
 - name: github.com/jinzhu/inflection
@@ -28,6 +28,15 @@ imports:
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/Sirupsen/logrus
   version: a3f95b5c423586578a4e099b11a46c2479628cac
+- name: github.com/ufukomer/go-boilerplate
+  version: ea3e85cee4e12bd7582adc1ff1cf4cd5604d9757
+  subpackages:
+  - handler
+  - model
+  - router
+  - router/middleware
+  - store
+  - store/datastore
 - name: github.com/ugorji/go
   version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
@@ -35,19 +44,20 @@ imports:
 - name: github.com/urfave/cli
   version: 4b90d79a682b4bf685762c7452db20f2a676ecb2
 - name: golang.org/x/crypto
-  version: bed12803fa9663d7aa2c2346b0c634ad2dcd43b7
+  version: 6914964337150723782436d56b3f21610a74ce7b
   subpackages:
   - acme/autocert
+  - bcrypt
 - name: golang.org/x/net
-  version: 41bba8d80bbfab43231ffdf4c210037baae5f6a3
+  version: ab5485076ff3407ad2d02db054635913f017b0ed
   subpackages:
   - context
 - name: golang.org/x/sys
-  version: 7a6e5648d140666db5d920909e082ca00a87ba2c
+  version: c4489faa6e5ab84c0ef40d6ee878f7a030281f0f
   subpackages:
   - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
-  version: 4c78c975fe7c825c6d1466c42be594d1d6f3aba6
+  version: 25c4ec802a7d637f88d584ab26798e94ad14c13b
 testImports: []

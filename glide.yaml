@@ -8,6 +8,7 @@ import:
 - package: golang.org/x/crypto
   subpackages:
   - acme/autocert
+  - bcrypt
 - package: github.com/mattn/go-isatty
   version: ^0.0.2
 - package: github.com/Sirupsen/logrus

@@ -16,6 +16,7 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 
 	api := e.Group("/api")
 	{
+		api.POST("login", handler.PostLogin)
 		api.GET("users", handler.GetUserList)
 	}
 
