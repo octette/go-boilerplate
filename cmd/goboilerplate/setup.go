@@ -2,12 +2,11 @@ package main
 
 import (
 	"github.com/urfave/cli"
-	
-	"github.com/ufukomer/go-boilerplate/store"
+
 	"github.com/ufukomer/go-boilerplate/store/datastore"
 )
 
-func setupStore(c *cli.Context) store.Store {
+func setupStore(c *cli.Context) *datastore.Datastore {
 	return datastore.New(func(d *datastore.Datastore) {
 		d.Host = c.String("host")
 		d.DBName = c.String("mysql-dbname")
