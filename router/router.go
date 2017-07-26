@@ -14,10 +14,12 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.Use(gin.Logger())
 	e.Use(middleware...)
 
-	api := e.Group("/api")
+	api := e.Group("/api/users")
 	{
-		api.GET("users/:id", handler.GetUser)
-		api.GET("users", handler.GetUsers)
+		api.GET("", handler.GetUsers)
+		api.GET("/:id", handler.GetUser)
+		api.POST("", handler.PostUser)
+		api.DELETE("/:id", handler.DeleteUser)
 	}
 
 	return e
