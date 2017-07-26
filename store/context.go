@@ -1,8 +1,6 @@
 package store
 
-import (
-	"golang.org/x/net/context"
-)
+import "context"
 
 const key = "store"
 

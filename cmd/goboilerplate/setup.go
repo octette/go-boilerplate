@@ -1,9 +1,10 @@
 package main
 
 import (
+	"github.com/urfave/cli"
+	
 	"github.com/ufukomer/go-boilerplate/store"
 	"github.com/ufukomer/go-boilerplate/store/datastore"
-	"github.com/urfave/cli"
 )
 
 func setupStore(c *cli.Context) store.Store {

@@ -3,13 +3,13 @@ package main
 import (
 	"net/http"
 
+	"github.com/urfave/cli"
+
 	"github.com/ufukomer/go-boilerplate/router"
 	"github.com/ufukomer/go-boilerplate/router/middleware"
-	"github.com/urfave/cli"
 )
 
 var flags = []cli.Flag{
-
 	cli.StringFlag{
 		EnvVar: "HOST",
 		Name:   "host",

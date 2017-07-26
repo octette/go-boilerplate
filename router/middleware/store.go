@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"github.com/ufukomer/go-boilerplate/store"
-
 	"github.com/gin-gonic/gin"
+	
+	"github.com/ufukomer/go-boilerplate/store"
 )
 
 // Store is a middleware function that initializes the Datastore and attaches to
