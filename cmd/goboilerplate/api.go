@@ -51,6 +51,8 @@ var flags = []cli.Flag{
 func api(c *cli.Context) error {
 
 	store := setupStore(c)
+	// close database
+	defer store.Close()
 
 	// setup the server and start the listener
 	handler := router.Load(

@@ -7,7 +7,6 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"github.com/ufukomer/go-boilerplate/store"
 	"github.com/ufukomer/go-boilerplate/model"
 )
 
@@ -24,7 +23,7 @@ type Datastore struct {
 
 type options func(*Datastore)
 
-func New(opts options) store.Store {
+func New(opts options) *Datastore {
 	d := &Datastore{}
 	opts(d)
 	d.DB = open(d)
