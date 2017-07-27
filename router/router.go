@@ -4,7 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
 	"github.com/ufukomer/go-boilerplate/handler"
+	mw "github.com/ufukomer/go-boilerplate/router/middleware"
 )
 
 func Load(middleware ...gin.HandlerFunc) http.Handler {
@@ -14,12 +16,23 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.Use(gin.Logger())
 	e.Use(middleware...)
 
-	api := e.Group("/api/users")
+	authMiddleware := mw.JWT()
+
+	e.POST("/login", authMiddleware.LoginHandler)
+
+	api := e.Group("/api")
+	api.Use(authMiddleware.MiddlewareFunc())
 	{
-		api.GET("", handler.GetUsers)
-		api.GET("/:id", handler.GetUser)
-		api.POST("", handler.PostUser)
-		api.DELETE("/:id", handler.DeleteUser)
+		auth := api.Group("/auth")
+		{
+			auth.GET("/refresh_token", authMiddleware.RefreshHandler)
+		}
+
+		users := api.Group("/users")
+		users.GET("", handler.GetUsers)
+		users.GET("/:id", handler.GetUser)
+		users.POST("", handler.PostUser)
+		users.DELETE("/:id", handler.DeleteUser)
 	}
 
 	return e
