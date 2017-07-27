@@ -1,5 +1,5 @@
-hash: 9a655710990426406b20250e03466d62ef031ff6b3317634b16d4a1cf3e174f4
-updated: 2017-07-24T15:31:41.898289699+03:00
+hash: 3b0291e40d1ab71a22c9b1f803b23c6bbd5445864aea0e0f548b88b23593b521
+updated: 2017-07-27T11:06:33.378989609+03:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -34,6 +34,10 @@ imports:
   version: 7a6e5648d140666db5d920909e082ca00a87ba2c
   subpackages:
   - unix
+- name: gopkg.in/appleboy/gin-jwt.v2
+  version: f7347d7c16fc8297bf5b7215b9e4847a5ca05d90
+- name: gopkg.in/dgrijalva/jwt-go.v3
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
