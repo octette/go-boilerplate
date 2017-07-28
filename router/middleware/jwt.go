@@ -81,12 +81,6 @@ type JWTMiddleware struct {
 	TimeFunc func() time.Time
 }
 
-// Login form structure.
-type Login struct {
-	Email    string
-	Password string
-}
-
 // MiddlewareInit initialize jwt configs.
 func (mw *JWTMiddleware) MiddlewareInit() error {
 
@@ -356,7 +350,7 @@ func (mw *JWTMiddleware) jwtFromCookie(c *gin.Context, key string) (string, erro
 }
 
 func JWT() *JWTMiddleware {
-	return &JWTMiddleware{
+	jwt := &JWTMiddleware{
 		Realm:      "boilerplate",
 		Key:        []byte("secret key"),
 		Timeout:    time.Hour,
@@ -382,4 +376,9 @@ func JWT() *JWTMiddleware {
 			})
 		},
 	}
+
+	// initialize middleware with default settings
+	jwt.MiddlewareInit()
+
+	return jwt
 }
