@@ -38,7 +38,7 @@ func open(d *Datastore) *gorm.DB {
 	}
 
 	db.AutoMigrate(&model.User{})
-	// db.AutoMigrate(&model.Post{})
+	db.AutoMigrate(&model.Post{})
 
 	return db
 }
