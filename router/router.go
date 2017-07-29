@@ -22,5 +22,15 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 		api.DELETE("/:id", handler.DeleteUser)
 	}
 
+	api = e.Group("/api/posts")
+	{
+		api.GET("", handler.GetPosts)
+		api.GET("/:id", handler.GetPost)
+		api.PUT("/:id", handler.UpdatePost)
+		api.POST("", handler.CreatePost)
+		api.DELETE("/:id", handler.DeletePost)
+
+	}
+
 	return e
 }

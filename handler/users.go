@@ -54,7 +54,6 @@ func PostUser(c *gin.Context) {
 
 func DeleteUser(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
-
 	if err := store.DeleteUser(c, uint(id)); err != nil {
 		c.String(http.StatusInternalServerError, "Error deleting user. %s", err)
 		return
