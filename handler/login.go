@@ -6,6 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	jwt "gopkg.in/dgrijalva/jwt-go.v3"
+
+	j "github.com/ufukomer/go-boilerplate/router/middleware/jwt"
 )
 
 // Login structure.
@@ -14,7 +16,7 @@ type login struct {
 	Password string
 }
 
-// LoginHandler can be used by clients to get a jwt token.
+// Login can be used by clients to get a jwt token.
 // Payload needs to be json in the form of {"email": "EMAIL", "password": "PASSWORD"}.
 // Reply will be of the form {"token": "TOKEN"}.
 func Login(c *gin.Context) {
@@ -22,45 +24,74 @@ func Login(c *gin.Context) {
 	var l login
 
 	if c.Bind(&l) != nil {
-		mw.unauthorized(c, http.StatusBadRequest, "Missing Email or Password")
+		j.Unauthorized(c, http.StatusBadRequest, "Missing Email or Password")
 		return
 	}
 
-	if mw.Authenticator == nil {
-		mw.unauthorized(c, http.StatusInternalServerError, "Missing define authenticator func")
-		return
-	}
-
-	userID, ok := mw.Authenticator(login.Email, login.Password, c)
+	userID, ok := j.Authenticator(l.Email, l.Password, c)
 
 	if !ok {
-		mw.unauthorized(c, http.StatusUnauthorized, "Incorrect Email / Password")
+		j.Unauthorized(c, http.StatusUnauthorized, "Incorrect Email / Password")
 		return
 	}
 
 	// Create the token
-	token := jwt.New(jwt.GetSigningMethod(mw.SigningAlgorithm))
+	token := jwt.New(jwt.GetSigningMethod(j.SigningAlgorithm))
 	claims := token.Claims.(jwt.MapClaims)
 
-	if mw.PayloadFunc != nil {
-		for key, value := range mw.PayloadFunc(login.Email) {
-			claims[key] = value
-		}
-	}
-
 	if userID == "" {
-		userID = login.Email
+		userID = l.Email
 	}
 
-	expire := mw.TimeFunc().Add(mw.Timeout)
+	expire := j.TimeFunc().Add(j.Timeout)
 	claims["id"] = userID
 	claims["exp"] = expire.Unix()
-	claims["orig_iat"] = mw.TimeFunc().Unix()
+	claims["orig_iat"] = j.TimeFunc().Unix()
 
-	tokenString, err := token.SignedString(mw.Key)
+	tokenString, err := token.SignedString(j.Key)
 
 	if err != nil {
-		mw.unauthorized(c, http.StatusUnauthorized, "Create JWT Token faild")
+		j.Unauthorized(c, http.StatusUnauthorized, "Create JWT Token faild")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"token":  tokenString,
+		"expire": expire.Format(time.RFC3339),
+	})
+}
+
+// RefreshHandler can be used to refresh a token.
+// The token still needs to be valid on refresh.
+// Reply will be of the form {"token": "TOKEN"}.
+func RefreshHandler(c *gin.Context) {
+	token, _ := j.ParseToken(c)
+	claims := token.Claims.(jwt.MapClaims)
+
+	origIat := int64(claims["orig_iat"].(float64))
+
+	if origIat < time.Now().Add(-j.MaxRefresh).Unix() {
+		j.Unauthorized(c, http.StatusUnauthorized, "Token is expired.")
+		return
+	}
+
+	// Create the token
+	newToken := jwt.New(jwt.GetSigningMethod(j.SigningAlgorithm))
+	newClaims := newToken.Claims.(jwt.MapClaims)
+
+	for key := range claims {
+		newClaims[key] = claims[key]
+	}
+
+	expire := j.TimeFunc().Add(j.Timeout)
+	newClaims["id"] = claims["id"]
+	newClaims["exp"] = expire.Unix()
+	newClaims["orig_iat"] = origIat
+
+	tokenString, err := newToken.SignedString(j.Key)
+
+	if err != nil {
+		j.Unauthorized(c, http.StatusUnauthorized, "Create JWT Token failed")
 		return
 	}
 
