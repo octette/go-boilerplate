@@ -16,6 +16,20 @@ func (db *Datastore) GetUser(id uint) (*model.User, error) {
 	return user, err
 }
 
+func (db *Datastore) GetUserByEmail(email string) (*model.User, error) {
+	var user = &model.User{}
+	var err = db.Where(&model.User{Email: email}).First(&user).Error
+
+	return user, err
+}
+
+func (db *Datastore) GetUserByLogin(email string, password string) (*model.User, error) {
+	var user = &model.User{}
+	var err = db.Where(&model.User{Email: email, Password: password}).First(&user).Error
+
+	return user, err
+}
+
 func (db *Datastore) CreateUser(user *model.User) error {
 	var err = db.Create(&user).Error
 

@@ -9,6 +9,8 @@ import (
 type Store interface {
 	GetUserList() ([]*model.User, error)
 	GetUser(id uint) (*model.User, error)
+	GetUserByEmail(email string) (*model.User, error)
+	GetUserByLogin(email string, password string) (*model.User, error)
 	CreateUser(user *model.User) error
 	DeleteUser(id uint) error
 	GetPostList() ([]*model.Post, error)
@@ -26,6 +28,14 @@ func GetUserList(c context.Context) ([]*model.User, error) {
 // GetUser gets the user object corresponding to the given id.
 func GetUser(c context.Context, id uint) (*model.User, error) {
 	return FromContext(c).GetUser(id)
+}
+
+func GetUserByEmail(c context.Context, email string) (*model.User, error) {
+	return FromContext(c).GetUserByEmail(email)
+}
+
+func GetUserByLogin(c context.Context, email string, password string) (*model.User, error) {
+	return FromContext(c).GetUserByLogin(email, password)
 }
 
 func CreateUser(c context.Context, user *model.User) error {

@@ -18,6 +18,7 @@ func GetPosts(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, posts)
 }
+
 func GetPost(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
 
@@ -42,7 +43,6 @@ func CreatePost(c *gin.Context) {
 		UserID:      in.UserID,
 		PublishedAt: in.PublishedAt,
 	}
-
 	if err = store.CreatePost(c, post); err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
@@ -52,7 +52,6 @@ func CreatePost(c *gin.Context) {
 
 func UpdatePost(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
-
 	in := &model.Post{}
 	err := c.Bind(in)
 	post := &model.Post{
@@ -71,11 +70,11 @@ func UpdatePost(c *gin.Context) {
 		c.String(http.StatusInternalServerError, err.Error())
 	}
 	c.JSON(http.StatusOK, post)
-
 }
 
 func DeletePost(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
+
 	if err := store.DeletePost(c, uint(id)); err != nil {
 		c.String(http.StatusInternalServerError, "Error deleting post. %s", err)
 		return

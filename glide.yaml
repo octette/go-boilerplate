@@ -10,3 +10,5 @@ import:
   - dialects/mysql
 - package: github.com/urfave/cli
   version: ^1.19.1
+- package: gopkg.in/dgrijalva/jwt-go.v3
+  version: ^3.0.0
