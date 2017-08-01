@@ -20,6 +20,7 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.POST("/login", handler.Login)
 
 	api := e.Group("/api")
+	users := api.Group("/users")
 	api.Use(j.JWT())
 	{
 		auth := api.Group("/auth")
@@ -27,12 +28,12 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 			auth.GET("/refresh_token", handler.RefreshHandler)
 		}
 
-		users := api.Group("/users")
 		users.GET("", handler.GetUsers)
 		users.GET("/:id", handler.GetUser)
-		users.POST("", handler.PostUser)
 		users.DELETE("/:id", handler.DeleteUser)
 	}
+
+	users.POST("", handler.PostUser)
 
 	api = e.Group("/api/posts")
 	{

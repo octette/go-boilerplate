@@ -7,15 +7,16 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// validate a email
+// validate email
 var reEmail = regexp.MustCompile("^[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$")
 
 var errUserEmailInvalid = errors.New("Invalid User Email")
 
+// User structure.
 type User struct {
 	gorm.Model
-	Email    string
-	Password string
+	Email string `gorm:"primary_key;unique_index;not null"`
+	Hash  []byte `gorm:"not null"`
 }
 
 // Validate validates the required fields and formats.

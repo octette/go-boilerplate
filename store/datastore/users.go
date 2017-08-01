@@ -1,6 +1,10 @@
 package datastore
 
-import "github.com/ufukomer/go-boilerplate/model"
+import (
+	"golang.org/x/crypto/bcrypt"
+
+	"github.com/ufukomer/go-boilerplate/model"
+)
 
 func (db *Datastore) GetUserList() ([]*model.User, error) {
 	var users = []*model.User{}
@@ -25,9 +29,16 @@ func (db *Datastore) GetUserByEmail(email string) (*model.User, error) {
 
 func (db *Datastore) GetUserByLogin(email string, password string) (*model.User, error) {
 	var user = &model.User{}
-	var err = db.Where(&model.User{Email: email, Password: password}).First(&user).Error
 
-	return user, err
+	if err := db.Where(&model.User{Email: email}).First(&user).Error; err != nil {
+		return nil, err
+	}
+
+	if err := bcrypt.CompareHashAndPassword(user.Hash, []byte(password)); err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
 
 func (db *Datastore) CreateUser(user *model.User) error {

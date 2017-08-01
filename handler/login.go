@@ -7,21 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 	jwt "gopkg.in/dgrijalva/jwt-go.v3"
 
+	"github.com/ufukomer/go-boilerplate/model"
 	j "github.com/ufukomer/go-boilerplate/router/middleware/jwt"
 )
-
-// Login structure.
-type login struct {
-	Email    string
-	Password string
-}
 
 // Login can be used by clients to get a jwt token.
 // Payload needs to be json in the form of {"email": "EMAIL", "password": "PASSWORD"}.
 // Reply will be of the form {"token": "TOKEN"}.
 func Login(c *gin.Context) {
 
-	var l login
+	var l model.Login
 
 	if c.Bind(&l) != nil {
 		j.Unauthorized(c, http.StatusBadRequest, "Missing Email or Password")

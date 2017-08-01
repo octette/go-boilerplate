@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/ufukomer/go-boilerplate/model"
@@ -31,25 +33,40 @@ func GetUser(c *gin.Context) {
 }
 
 func PostUser(c *gin.Context) {
-	in := &model.User{}
-	err := c.Bind(in)
+	login := &model.Login{}
+	err := c.Bind(login)
 	if err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	user := &model.User{
-		Email:    in.Email,
-		Password: in.Password,
+
+	if err = login.Validate(); err != nil {
+		c.String(http.StatusBadRequest, err.Error())
+		return
 	}
+
+	hash, err := bcrypt.GenerateFromPassword([]byte(login.Password), bcrypt.DefaultCost)
+	if err != nil {
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	user := &model.User{
+		Email: login.Email,
+		Hash:  hash,
+	}
+
 	if err = user.Validate(); err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
+
 	if err = store.CreateUser(c, user); err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, user)
+
+	c.Status(http.StatusOK)
 }
 
 func DeleteUser(c *gin.Context) {
