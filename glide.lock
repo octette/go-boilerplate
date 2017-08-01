@@ -1,5 +1,5 @@
-hash: 3b0291e40d1ab71a22c9b1f803b23c6bbd5445864aea0e0f548b88b23593b521
-updated: 2017-07-27T11:06:33.378989609+03:00
+hash: 7497b9bc4cf9ac47a06a18a1037e94b455ebbd1631899fc7b452805292d73687
+updated: 2017-08-01T10:08:41.118615353+03:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -30,12 +30,14 @@ imports:
   - codec
 - name: github.com/urfave/cli
   version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
+- name: golang.org/x/crypto
+  version: bed12803fa9663d7aa2c2346b0c634ad2dcd43b7
+  subpackages:
+  - bcrypt
 - name: golang.org/x/sys
   version: 7a6e5648d140666db5d920909e082ca00a87ba2c
   subpackages:
   - unix
-- name: gopkg.in/appleboy/gin-jwt.v2
-  version: f7347d7c16fc8297bf5b7215b9e4847a5ca05d90
 - name: gopkg.in/dgrijalva/jwt-go.v3
   version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: gopkg.in/go-playground/validator.v8
