@@ -20,28 +20,36 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	e.POST("/login", handler.Login)
 
 	api := e.Group("/api")
-	users := api.Group("/users")
-	api.Use(j.JWT())
+
+	api.Use()
 	{
 		auth := api.Group("/auth")
+		auth.Use(j.MiddlewareFunc())
 		{
-			auth.GET("/refresh_token", handler.RefreshHandler)
+			auth.GET("/refresh_token", handler.Refresh)
 		}
 
-		users.GET("", handler.GetUsers)
-		users.GET("/:id", handler.GetUser)
-		users.DELETE("/:id", handler.DeleteUser)
-	}
+		users := api.Group("/users")
+		{
+			users.POST("", handler.PostUser)
+			users.GET("", handler.GetUsers)
+			users.GET("/:id", handler.GetUser)
+			users.DELETE("/:id", handler.DeleteUser)
+		}
 
-	users.POST("", handler.PostUser)
-
-	api = e.Group("/api/posts")
-	{
-		api.GET("", handler.GetPosts)
-		api.GET("/:id", handler.GetPost)
-		api.PUT("/:id", handler.UpdatePost)
-		api.POST("", handler.CreatePost)
-		api.DELETE("/:id", handler.DeletePost)
+		posts := api.Group("/posts")
+		{
+			posts.GET("", handler.GetPosts)
+			posts.GET("/:id", handler.GetPost)
+			posts.PATCH("/:id", handler.PatchPost)
+			posts.POST("", handler.PostPost)
+			posts.Use(j.MiddlewareFunc())
+			{
+				// posts.PATCH("/:id", handler.PatchPost)
+				// posts.POST("", handler.PostPost)
+				posts.DELETE("/:id", handler.DeletePost)
+			}
+		}
 	}
 
 	return e

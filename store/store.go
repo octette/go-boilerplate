@@ -18,6 +18,10 @@ type Store interface {
 	CreatePost(user *model.Post) error
 	UpdatePost(post *model.Post, id uint) (*model.Post, error)
 	DeletePost(id uint) error
+	GetComment(id uint) (*model.Comment, error)
+	CreateComment(comment *model.Comment) error
+	UpdateComment(comment *model.Comment, id uint) (*model.Comment, error)
+	DeleteComment(id uint) error
 }
 
 // GetUserList gets a list of all users in the system.
@@ -51,7 +55,7 @@ func GetPostList(c context.Context) ([]*model.Post, error) {
 	return FromContext(c).GetPostList()
 }
 
-// GetUser gets the user object corresponding to the given id.
+// GetPost gets the user object corresponding to the given id.
 func GetPost(c context.Context, id uint) (*model.Post, error) {
 	return FromContext(c).GetPost(id)
 }
@@ -66,4 +70,20 @@ func UpdatePost(c context.Context, post *model.Post, id uint) (*model.Post, erro
 
 func DeletePost(c context.Context, id uint) error {
 	return FromContext(c).DeletePost(id)
+}
+
+func GetComment(c context.Context, id uint) (*model.Comment, error) {
+	return FromContext(c).GetComment(id)
+}
+
+func CreateComment(c context.Context, comment *model.Comment) error {
+	return FromContext(c).CreateComment(comment)
+}
+
+func UpdateComment(c context.Context, comment *model.Comment, id uint) (*model.Comment, error) {
+	return FromContext(c).UpdateComment(comment, id)
+}
+
+func DeleteComment(c context.Context, id uint) error {
+	return FromContext(c).DeleteComment(id)
 }

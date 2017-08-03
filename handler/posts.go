@@ -30,7 +30,7 @@ func GetPost(c *gin.Context) {
 	c.JSON(http.StatusOK, post)
 }
 
-func CreatePost(c *gin.Context) {
+func PostPost(c *gin.Context) {
 	in := &model.Post{}
 	err := c.Bind(in)
 	if err != nil {
@@ -50,24 +50,24 @@ func CreatePost(c *gin.Context) {
 	c.JSON(http.StatusOK, post)
 }
 
-func UpdatePost(c *gin.Context) {
+func PatchPost(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
 	in := &model.Post{}
 	err := c.Bind(in)
+	if err != nil {
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
 	post := &model.Post{
 		Title:       in.Title,
 		Content:     in.Content,
 		UserID:      in.UserID,
 		PublishedAt: in.PublishedAt,
+		Vote:        in.Vote,
 	}
-
-	if err != nil {
-		c.String(http.StatusBadRequest, err.Error())
-		return
-	}
-
-	if post, err = store.UpdatePost(c, post, uint(id)); err != nil {
+	if _, err := store.UpdatePost(c, post, uint(id)); err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
+		return
 	}
 	c.JSON(http.StatusOK, post)
 }

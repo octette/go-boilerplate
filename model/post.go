@@ -8,6 +8,7 @@ type Post struct {
 	gorm.Model
 	Title       string
 	Content     string
-	UserID      int
+	UserID      uint
 	PublishedAt string
+	Vote        int32
 }

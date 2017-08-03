@@ -23,14 +23,16 @@ func (db *Datastore) CreatePost(post *model.Post) error {
 }
 
 func (db *Datastore) UpdatePost(post *model.Post, id uint) (*model.Post, error) {
-	editPost := new(model.Post)
-	err := db.First(editPost, id).Error
-	editPost.Title = post.Title
-	editPost.Content = post.Content
-	editPost.UserID = post.UserID
-	editPost.PublishedAt = post.PublishedAt
-	err = db.Save(&editPost).Error
-	return editPost, err
+	newPost := new(model.Post)
+	if err := db.First(newPost, id).Error; err != nil {
+		return nil, err
+	}
+
+	if err := db.Model(&newPost).Updates(post).Error; err != nil {
+		return nil, err
+	}
+
+	return newPost, nil
 }
 
 func (db *Datastore) DeletePost(id uint) error {
