@@ -59,13 +59,13 @@ func Login(c *gin.Context) {
 // RefreshHandler can be used to refresh a token.
 // The token still needs to be valid on refresh.
 // Reply will be of the form {"token": "TOKEN"}.
-func RefreshHandler(c *gin.Context) {
+func Refresh(c *gin.Context) {
 	token, _ := j.ParseToken(c)
 	claims := token.Claims.(jwt.MapClaims)
 
 	origIat := int64(claims["orig_iat"].(float64))
 
-	if origIat < time.Now().Add(-j.MaxRefresh).Unix() {
+	if origIat < j.TimeFunc().Add(-j.MaxRefresh).Unix() {
 		j.Unauthorized(c, http.StatusUnauthorized, "Token is expired.")
 		return
 	}

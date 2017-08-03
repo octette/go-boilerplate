@@ -65,8 +65,8 @@ func Unauthorized(c *gin.Context, code int, message string) {
 	return
 }
 
-// JWT returns Middleware interface.
-func JWT() gin.HandlerFunc {
+// MiddlewareFunc returns Middleware interface.
+func MiddlewareFunc() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		middlewareImpl(c)
 		return
