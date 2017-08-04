@@ -56,7 +56,7 @@ func Login(c *gin.Context) {
 	})
 }
 
-// RefreshHandler can be used to refresh a token.
+// Refresh can be used to refresh a token.
 // The token still needs to be valid on refresh.
 // Reply will be of the form {"token": "TOKEN"}.
 func Refresh(c *gin.Context) {

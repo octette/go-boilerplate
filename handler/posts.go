@@ -31,19 +31,12 @@ func GetPost(c *gin.Context) {
 }
 
 func PostPost(c *gin.Context) {
-	in := &model.Post{}
-	err := c.Bind(in)
-	if err != nil {
+	post := new(model.Post)
+	if err := c.Bind(post); err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	post := &model.Post{
-		Title:       in.Title,
-		Content:     in.Content,
-		UserID:      in.UserID,
-		PublishedAt: in.PublishedAt,
-	}
-	if err = store.CreatePost(c, post); err != nil {
+	if err := store.CreatePost(c, post); err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -52,9 +45,8 @@ func PostPost(c *gin.Context) {
 
 func PatchPost(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
-	in := &model.Post{}
-	err := c.Bind(in)
-	if err != nil {
+	in := new(model.Post)
+	if err := c.Bind(in); err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
@@ -65,11 +57,12 @@ func PatchPost(c *gin.Context) {
 		PublishedAt: in.PublishedAt,
 		Vote:        in.Vote,
 	}
-	if _, err := store.UpdatePost(c, post, uint(id)); err != nil {
+	newPost, err := store.UpdatePost(c, post, uint(id))
+	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, post)
+	c.JSON(http.StatusOK, newPost)
 }
 
 func DeletePost(c *gin.Context) {

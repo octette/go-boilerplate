@@ -35,7 +35,6 @@ func PostComment(c *gin.Context) {
 func PathComment(c *gin.Context) {
 	id, _ := strconv.ParseUint(c.Param("id"), 10, 32)
 	in := new(model.Comment)
-
 	if err := c.Bind(in); err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		return
@@ -46,11 +45,12 @@ func PathComment(c *gin.Context) {
 		PostID:  in.PostID,
 		Vote:    in.Vote,
 	}
-	if _, err := store.UpdateComment(c, comment, uint(id)); err != nil {
+	newComment, err := store.UpdateComment(c, comment, uint(id))
+	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, comment)
+	c.JSON(http.StatusOK, newComment)
 }
 
 func DeleteComment(c *gin.Context) {
